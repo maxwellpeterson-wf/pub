@@ -43,21 +43,12 @@ import 'package:scheduled_test/scheduled_stream.dart';
 import 'package:scheduled_test/scheduled_test.dart' hide fail;
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:unittest/compact_vm_config.dart';
 import 'package:yaml/yaml.dart';
 
 import 'descriptor.dart' as d;
 import 'serve_packages.dart';
 
 export 'serve_packages.dart';
-
-/// This should be called at the top of a test file to set up an appropriate
-/// test configuration for the machine running the tests.
-initConfig() {
-  useCompactVMConfiguration();
-  filterStacks = true;
-  unittestConfiguration.timeout = null;
-}
 
 /// The current [HttpServer] created using [serve].
 var _server;

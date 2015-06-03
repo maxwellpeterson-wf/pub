@@ -25,7 +25,6 @@ class RewriteTransformer extends Transformer {
 """;
 
 main() {
-  initConfig();
   withBarbackVersions("any", () {
     integration("outputs error to JSON in a failed build", () {
       // Loading transformers takes several seconds, so make sure we don't

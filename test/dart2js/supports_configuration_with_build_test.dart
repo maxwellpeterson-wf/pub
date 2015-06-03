@@ -10,7 +10,6 @@ import '../descriptor.dart' as d;
 import '../test_pub.dart';
 
 main() {
-  initConfig();
   integration("compiles dart.js and interop.js next to entrypoints when "
               "dartjs is explicitly configured", () {
     // Dart2js can take a long time to compile dart code, so we increase the

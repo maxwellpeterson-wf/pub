@@ -12,7 +12,7 @@ import 'package:pub/src/source.dart';
 import 'package:pub/src/source/path.dart';
 import 'package:pub/src/source_registry.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 import 'test_pub.dart';
 
@@ -41,7 +41,6 @@ class MockSource extends Source {
 }
 
 main() {
-  initConfig();
   group('parse()', () {
     var sources = new SourceRegistry();
     sources.register(new MockSource());

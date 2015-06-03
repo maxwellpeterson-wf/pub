@@ -10,8 +10,6 @@ import '../descriptor.dart' as d;
 import '../test_pub.dart';
 
 main() {
-  initConfig();
-
   // This is a regression test for dartbug.com/14442.
   //
   // If you have a long chain of path dependencies with long relative paths,

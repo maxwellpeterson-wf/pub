@@ -8,8 +8,6 @@ import '../descriptor.dart' as d;
 import '../test_pub.dart';
 
 main() {
-  initConfig();
-
   integration("includes .dart files from dependencies in debug mode", () {
     // Dart2js can take a long time to compile dart code, so we increase the
     // timeout to cope with that.

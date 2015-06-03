@@ -9,7 +9,6 @@ import '../test_pub.dart';
 import '../serve/utils.dart';
 
 main() {
-  initConfig();
   integration("converts a Dart isolate entrypoint in web to JS", () {
     // Increase the timeout because dart2js takes a lot longer than usual to
     // compile isolate entrypoints.

@@ -9,7 +9,6 @@ import '../serve/utils.dart';
 import '../test_pub.dart';
 
 main() {
-  initConfig();
   group("passes environment constants to dart2js", () {
     setUp(() {
       // Dart2js can take a long time to compile dart code, so we increase the

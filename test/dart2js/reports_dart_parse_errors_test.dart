@@ -11,7 +11,6 @@ import '../descriptor.dart' as d;
 import '../test_pub.dart';
 
 main() {
-  initConfig();
   integration("reports Dart parse errors", () {
     // Dart2js can take a long time to compile dart code, so we increase the
     // timeout to cope with that.

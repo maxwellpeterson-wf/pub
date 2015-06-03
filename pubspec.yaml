@@ -32,5 +32,8 @@ dependencies:
 
 dev_dependencies:
   scheduled_test: "^0.11.8"
-  source_maps: "^0.9.0"
-  unittest: "^0.11.0"
+  test: "^0.12.0"
+
+dependency_overrides:
+  test: {path: ../pkg/unittest}
+  scheduled_test: {path: ../pkg/scheduled_test}
