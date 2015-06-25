@@ -25,11 +25,13 @@ main() {
     pubServe(args: ["web"]);
 
     // Bind the new directory.
-    expectWebSocketResult("serveDirectory", {"path": "test"}, {
-      "url": matches(r"http://localhost:\d+")
-    }).then((response) {
-      var url = Uri.parse(response["url"]);
-      registerServerPort("test", url.port);
+    schedule(() {
+      return expectWebSocketResult("serveDirectory", {"path": "test"}, {
+        "url": matches(r"http://localhost:\d+")
+      }).then((response) {
+        var url = Uri.parse(response["url"]);
+        registerServerPort("test", url.port);
+      });
     });
 
     // It should be served now.

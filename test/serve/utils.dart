@@ -367,7 +367,7 @@ Future<Map> webSocketRequest(String method, [Map params]) {
     ]).then((results) {
       var resolvedParams = results[1];
       chainToCompleter(
-          currentSchedule.wrapFuture(_jsonRpcRequest(method, resolvedParams)),
+          _jsonRpcRequest(method, resolvedParams),
           completer);
     });
   }, "send $method with $params to web socket");

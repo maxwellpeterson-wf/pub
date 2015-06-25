@@ -47,14 +47,14 @@ main() {
     sources.register(new PathSource());
 
     var throwsPubspecException =
-      throwsA(new isInstanceOf<PubspecException>('PubspecException'));
+      throwsA(new isInstanceOf<PubspecException>());
 
     expectPubspecException(String contents, fn(Pubspec pubspec),
         [String expectedContains]) {
       var expectation = throwsPubspecException;
       if (expectedContains != null) {
         expectation = throwsA(allOf(
-            new isInstanceOf<PubspecException>('PubspecException'),
+            new isInstanceOf<PubspecException>(),
             predicate((error) => error.message.contains(expectedContains))));
       }
 

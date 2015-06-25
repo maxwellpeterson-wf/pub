@@ -1176,6 +1176,7 @@ _testResolve(void testFn(String description, Function body),
     }
 
     // Resolve the versions.
+    log.verbosity = log.Verbosity.NONE;
     var future = resolveVersions(
         downgrade ? SolveType.DOWNGRADE : SolveType.GET,
         cache.sources, root, lockFile: realLockFile);

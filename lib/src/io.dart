@@ -482,6 +482,9 @@ void createPackageSymlink(String name, String target, String symlink,
 final bool runningAsTest =
     !path.url.basename(Platform.script.path).startsWith('pub.');
 
+final bool runningAsTestRunner =
+    path.url.basename(Platform.script.path).startsWith('runInIsolate.dart');
+
 /// Whether the current process is a pub subprocess being run from a test.
 ///
 /// This works because when running from tests, pub always uses a snapshot named
@@ -534,6 +537,9 @@ final String pubRoot = (() {
   if (runningFromSdk) {
     throw new StateError("Can't get pub's root from the SDK.");
   }
+
+  // The test runner always runs from the working directory.
+  if (runningAsTestRunner) return path.current;
 
   var script = path.fromUri(Platform.script);
   if (runningAsTest) {

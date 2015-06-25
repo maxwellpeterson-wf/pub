@@ -201,7 +201,6 @@ void serve([List<d.Descriptor> contents]) {
   schedule(() {
     return _closeServer().then((_) {
       return shelf_io.serve((request) {
-        currentSchedule.heartbeat();
         var path = p.posix.fromUri(request.url.path.replaceFirst("/", ""));
         _requestedPaths.add(path);
 

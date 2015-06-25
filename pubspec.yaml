@@ -31,9 +31,11 @@ dependencies:
   yaml: "^2.0.0"
 
 dev_dependencies:
-  scheduled_test: "^0.11.8"
+  scheduled_test: "^0.12.0"
   test: "^0.12.0"
 
 dependency_overrides:
-  test: {path: ../pkg/unittest}
-  scheduled_test: {path: ../pkg/scheduled_test}
+  test:
+    git:
+      url: https://github.com/dart-lang/test
+      ref: 68ca1a2d918de671ca001a4cd2e1ed9546a909dc
