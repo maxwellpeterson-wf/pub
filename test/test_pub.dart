@@ -362,14 +362,6 @@ void solo_integration(String description, void body()) =>
 
 void _integration(String description, void body(), [Function testFn]) {
   testFn(description, () {
-    // TODO(nweiz): remove this when issue 15362 is fixed.
-    currentSchedule.timeout *= 2;
-
-    // The windows bots are very slow, so we increase the default timeout.
-    if (Platform.operatingSystem == "windows") {
-      currentSchedule.timeout *= 2;
-    }
-
     _sandboxDir = createSystemTempDir();
     d.defaultRoot = sandboxDir;
     currentSchedule.onComplete.schedule(() => deleteEntry(_sandboxDir),
@@ -698,10 +690,6 @@ String get _packageRoot => p.absolute(Platform.packageRoot);
 /// This also increases the [Schedule] timeout to 30 seconds on Windows,
 /// where Git runs really slowly.
 void ensureGit() {
-  if (Platform.operatingSystem == "windows") {
-    currentSchedule.timeout = new Duration(seconds: 30);
-  }
-
   if (!gitlib.isInstalled) {
     throw new Exception("Git must be installed to run this test.");
   }

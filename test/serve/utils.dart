@@ -161,10 +161,6 @@ ScheduledProcess startPubServe({Iterable<String> args,
 
   if (args != null) pubArgs.addAll(args);
 
-  // Dart2js can take a long time to compile dart code, so we increase the
-  // timeout to cope with that.
-  currentSchedule.timeout *= 1.5;
-
   if (createWebDir) d.dir(appPath, [d.dir("web")]).create();
   return startPub(args: pubArgs);
 }

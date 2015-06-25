@@ -13,10 +13,6 @@ main() {
 
   integration("compiles dart.js and interop.js next to entrypoints when "
       "browser is a dependency_override", () {
-    // Dart2js can take a long time to compile dart code, so we increase the
-    // timeout to cope with that.
-    currentSchedule.timeout *= 3;
-
     serveBrowserPackage();
 
     d.dir(appPath, [
