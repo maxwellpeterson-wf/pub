@@ -7,6 +7,7 @@ library pub.source.git;
 import 'dart:async';
 
 import 'package:path/path.dart' as path;
+import 'package:pub_semver/pub_semver.dart';
 
 import '../git.dart' as git;
 import '../io.dart';
@@ -38,6 +39,28 @@ class GitSource extends CachedSource {
         return pubspec.name;
       });
     });
+  }
+
+  /// Gets the list of all versions from git tags.
+  /// Anything that Version.parse understands is considered a version,
+  /// it will also attempt to strip off a preceding 'v' e.g. v1.0.0
+  Future<List<Pubspec>> getVersions(String name, description) async {
+    PackageId id = new PackageId(name, null, null, _getDescription(description));
+    List result = await git.run(["tag", "-l"], workingDir: _repoCachePath(id));
+    List<Pubspec> results = [];
+    result.forEach((String version) {
+      if (version.startsWith('v')) {
+        version = version.substring(1);
+      }
+      try {
+        Version v = new Version.parse(version);
+        results.add(new Pubspec(name, version: v));
+      } on FormatException {}
+    });
+    if (results.length > 0) {
+      return results;
+    }
+    return super.getVersions(name, description);
   }
 
   /// Since we don't have an easy way to read from a remote Git repo, this
@@ -312,13 +335,16 @@ class GitSource extends CachedSource {
   /// [resolveId].
   ///
   /// [description] may be a description or a [PackageId].
-  String _getEffectiveRef(description) {
-    description = _getDescription(description);
+  String _getEffectiveRef(PackageId id) {
+    Map description = _getDescription(id);
     if (description is Map && description.containsKey('resolved-ref')) {
       return description['resolved-ref'];
     }
 
     var ref = _getRef(description);
+    if (ref == null && id.version != Version.none) {
+      return id.version.toString();
+    }
     return ref == null ? 'HEAD' : ref;
   }
 
